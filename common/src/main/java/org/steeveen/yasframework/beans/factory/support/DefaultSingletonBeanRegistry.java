@@ -19,7 +19,7 @@ public class DefaultSingletonBeanRegistry implements SingletonBeanRegistry {
     }
 
     @Override
-    public void registryStringleton(String beanName, Object singletonObject) {
+    public void registrySingleton(String beanName, Object singletonObject) {
         singletonObjects.put(beanName, singletonObject);
     }
 }

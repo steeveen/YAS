@@ -9,5 +9,5 @@ package org.steeveen.yasframework.beans.factory.config;
 public interface SingletonBeanRegistry {
     Object getSingleton(String beanName);
 
-    void registryStringleton(String beanName, Object singletonObject);
+    void registrySingleton(String beanName, Object singletonObject);
 }
