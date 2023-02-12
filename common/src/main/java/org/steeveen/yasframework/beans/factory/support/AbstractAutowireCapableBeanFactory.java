@@ -1,7 +1,11 @@
 package org.steeveen.yasframework.beans.factory.support;
 
+import cn.hutool.core.bean.BeanUtil;
 import org.steeveen.yasframework.beans.BeansException;
+import org.steeveen.yasframework.beans.PropertyValue;
+import org.steeveen.yasframework.beans.PropertyValues;
 import org.steeveen.yasframework.beans.factory.config.BeanDefinition;
+import org.steeveen.yasframework.beans.factory.config.BeanReference;
 
 import java.lang.reflect.Constructor;
 
@@ -18,18 +22,22 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
     private InstantiationStrategy instantiationStrategy = new SimpleInstantiationStrategy();
 
     @Override
-    protected Object createBean(String name, BeanDefinition beanDefinition, Object[] args) throws BeansException {
+    protected Object createBean(String beanName, BeanDefinition beanDefinition, Object[] args) throws BeansException {
         Object bean = null;
         //尝试通过Bean定义中的默认构造创建对象
         try {
-            bean = createBeanInstance(name, beanDefinition, args);
+            bean = createBeanInstance(beanName, beanDefinition, args);
+            /*完成bean初始化后，对bean中的属性进行填充*/
+            applyPropertyValues(beanName,bean,beanDefinition    );
         } catch (Exception e) {
             throw new BeansException("instantiation or bean failed", e);
         }
         //将创建出的对象存入单例池中
-        registrySingleton(name, bean);
+        registrySingleton(beanName, bean);
         return bean;
     }
+
+
 
     protected Object createBeanInstance(String name, BeanDefinition beanDefinition, Object[] args) throws BeansException {
         Constructor constructorToUse = null;
@@ -44,6 +52,25 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
             }
         }
         return getInstantiationStrategy().instantiate(beanDefinition, name, constructorToUse, args);
+    }
+
+    protected   void applyPropertyValues(String beanName, Object bean, BeanDefinition beanDefinition) throws BeansException {
+        try{
+            PropertyValues propertyValues = beanDefinition.getPropertyValues();
+            for (PropertyValue propertyValue : propertyValues.getPropertyValues()) {
+                String name = propertyValue.getName();
+                Object value = propertyValue.getValue();
+                /*基本类型直接填充即可，如果是引用类型，则通过beanName从容器中查询，并填充，暂不考虑循环依赖等问题*/
+                if (value instanceof BeanReference){
+                    BeanReference beanReference= (BeanReference) value;
+                    value=getBean(beanReference.getBeanName());
+                }
+                BeanUtil.setFieldValue(bean,name,value);
+            }
+        } catch (Exception e) {
+            throw new BeansException("Error setting property values:"+beanName);
+        }
+
     }
 
     public InstantiationStrategy getInstantiationStrategy() {

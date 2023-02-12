@@ -20,11 +20,10 @@ public class SimpleInstantiationStrategy implements InstantiationStrategy{
                 //TODO 为什么不直接使用ctor呢
                 return clazz.getDeclaredConstructor(ctor.getParameterTypes()).newInstance(args);
             }else{
-                clazz.getDeclaredConstructor().newInstance(args);
+                return clazz.getDeclaredConstructor().newInstance(args);
             }
         } catch (NoSuchMethodException|InstantiationException|IllegalAccessException |InvocationTargetException e) {
             throw new BeansException("Failed to instantiate ['"+clazz.getName()+"']",e);
         }
-        return null;
     }
 }
