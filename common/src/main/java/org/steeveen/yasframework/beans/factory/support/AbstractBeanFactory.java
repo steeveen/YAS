@@ -6,7 +6,10 @@ import org.steeveen.yasframework.beans.factory.config.BeanDefinition;
 
 /**
  * beanFactory的实现类，结合定义的单例结构，实现beanFactory的功能
- *
+ * 作用，对bean工厂做进一步的具象。这个工厂可以有很多种写法，但是结合spring的应用场景，一般只需要一个单例对象就可以了，所以这里可以借助之前构建的单例进行实现。
+ * 当外界想要获取对象时，就从单例池中获取，如果单例池中没有，则创建、入池、再返回。那么一个对象要如何创建呢，这个要交由子类去实现了，子类实现createBean即可。
+ * 同样，创建一个bean也需要一些基本信息，这个基本信息的加载也交由子类去实现。
+ * 根据BeanDefination去构建。这个逻辑交由子类去实现getBeanDefinition.
  * @author steeveen
  * @date 2023/2/11
  */

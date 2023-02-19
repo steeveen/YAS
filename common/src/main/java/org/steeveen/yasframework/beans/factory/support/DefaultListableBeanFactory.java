@@ -8,6 +8,8 @@ import java.util.Map;
 
 /**
  * 核心的bean工厂实现
+ * 设计作用：使用一个map对BeanDefination工厂进行了实现。同时，补全了BeanFactory最后一个——获取Bean定义的行为实现。
+ * 已经可以用来作为一个完备的容器使用
  * @author steeveen
  * @time 2023/2/11
  */

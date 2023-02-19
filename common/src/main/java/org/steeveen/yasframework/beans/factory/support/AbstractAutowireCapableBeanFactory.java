@@ -11,6 +11,10 @@ import java.lang.reflect.Constructor;
 
 /**
  * 在抽象BeanFactory上，实现创建bean的逻辑
+ * 实现了bean的创建逻辑，
+ *  实例化：提供了两种实例化策略，JDK和cgLib
+ *  填充属性
+ * 但因为没有提供BeanDefination的读取方法，仍然是抽象的。
  *
  * @author steeveen
  * @date 2023/2/11
