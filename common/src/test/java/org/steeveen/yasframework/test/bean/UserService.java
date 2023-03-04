@@ -1,12 +1,12 @@
-package org.steeveen.yasframework.test.bean.bean;
+package org.steeveen.yasframework.test.bean;
 
 public class UserService {
     private String uId;
     /*需要注入的对象*/
     private UserDao userDao;
 
-    public void queryUserInfo() {
-        System.out.println("查询用户信息:" + userDao.queryUserName(uId));
+    public String queryUserInfo() {
+        return userDao.queryUserName(uId);
     }
 
     @Override

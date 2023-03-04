@@ -1,4 +1,4 @@
-package org.steeveen.yasframework.test.bean.bean;
+package org.steeveen.yasframework.test.bean;
 
 import java.util.HashMap;
 import java.util.Map;

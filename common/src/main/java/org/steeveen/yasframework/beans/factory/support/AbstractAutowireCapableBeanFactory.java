@@ -43,7 +43,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 
 
 
-    protected Object createBeanInstance(String name, BeanDefinition beanDefinition, Object[] args) throws BeansException {
+    protected Object createBeanInstance(String name, BeanDefinition beanDefinition, Object[] args)  {
         Constructor constructorToUse = null;
         Class beanClass = beanDefinition.getBeanClass();
         /*从众多声明的构造函数中，找到符合传入参数的构造函数，*/

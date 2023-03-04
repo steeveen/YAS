@@ -10,6 +10,7 @@ import org.steeveen.yasframework.beans.factory.config.BeanDefinition;
  * 当外界想要获取对象时，就从单例池中获取，如果单例池中没有，则创建、入池、再返回。那么一个对象要如何创建呢，这个要交由子类去实现了，子类实现createBean即可。
  * 同样，创建一个bean也需要一些基本信息，这个基本信息的加载也交由子类去实现。
  * 根据BeanDefination去构建。这个逻辑交由子类去实现getBeanDefinition.
+ *
  * @author steeveen
  * @date 2023/2/11
  */
@@ -17,12 +18,17 @@ public abstract class AbstractBeanFactory extends DefaultSingletonBeanRegistry i
 
     @Override
     public Object getBean(String name) throws BeansException {
-        return getBean(name, null);
+        return doGetBean(name, null);
     }
 
     @Override
     public Object getBean(String name, Object... args) throws BeansException {
         return doGetBean(name, args);
+    }
+
+    @Override
+    public <T> T getBean(String name, Class<T> requiredType) throws BeansException {
+        return (T) getBean(name);
     }
 
     protected <T> T doGetBean(final String name, final Object[] args) throws BeansException {

@@ -1,15 +1,14 @@
-package org.steeveen.yasframework.test.bean;
+package org.steeveen.yasframework.test;
 
 import org.junit.Test;
 import org.steeveen.yasframework.beans.BeansException;
 import org.steeveen.yasframework.beans.PropertyValue;
 import org.steeveen.yasframework.beans.PropertyValues;
-import org.steeveen.yasframework.beans.factory.BeanFactory;
 import org.steeveen.yasframework.beans.factory.config.BeanDefinition;
 import org.steeveen.yasframework.beans.factory.config.BeanReference;
 import org.steeveen.yasframework.beans.factory.support.DefaultListableBeanFactory;
-import org.steeveen.yasframework.test.bean.bean.UserDao;
-import org.steeveen.yasframework.test.bean.bean.UserService;
+import org.steeveen.yasframework.test.bean.UserDao;
+import org.steeveen.yasframework.test.bean.UserService;
 
 public class ApiTest {
     @Test

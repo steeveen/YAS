@@ -1,9 +1,8 @@
 package org.steeveen.yasframework.beans.factory.config;
 
-import org.steeveen.yasframework.beans.PropertyValue;
 import org.steeveen.yasframework.beans.PropertyValues;
 
-/**
+/** 对一个bean对象定义的抽象
  * @author steeveen
  * @time 2023/2/11 16:40
  */

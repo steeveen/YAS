@@ -10,6 +10,11 @@ import java.net.URL;
  * @date 2023/2/19 22:19
  */
 public class DefaultResourceLoader implements ResourceLoader{
+    /**
+     * 工厂模式，根据传入的路径不同，创建不同的Resource返回
+     * @param location
+     * @return
+     */
     @Override
     public Resource getResource(String location) {
         Assert.notNull(location,"Location must not be null");
